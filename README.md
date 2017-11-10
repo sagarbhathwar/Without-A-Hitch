@@ -1,15 +1,15 @@
-##Without-A-Hitch
+## Without-A-Hitch
 
 **Platform:** Python 3
 
-**Libraries:**
+**Python Libraries required:**
 * django 1.11
 * psycopg2 2.7
 * Pillow 4.2 (For images)
 
 **External Dependencies:** Postgresql 9/10
 
-####**How to set up the environment to run the project:**
+#### **How to set up the environment to run the project:**
 1. Install the necessary python libraries and postgresql
 2. Create the database using configdb.sql
 3. Run ```python manage.py makemigrations``` to create DB migrations from models
