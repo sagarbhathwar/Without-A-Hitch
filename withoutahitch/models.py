@@ -34,7 +34,6 @@ class Service(models.Model):
 
 
 class Venue(Service):
-    venue_name = models.CharField(max_length=50)
     venue_size = models.IntegerField()
 
 
