@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-
+import django
 
 # Useful when referencing views from urls.py
 app_name = "withoutahitch"
@@ -10,6 +10,7 @@ urlpatterns = [
     url(r"^login/$", views.login_page, name="login_page"),
     url(r"^register/$", views.register_page, name="register_page"),
     url(r"^about/$", views.contact, name="contact"),
+    url(r"^logging/$" , views.auth, name = "logging"),
 
     # A page dedicated to each vendor
     url(r"^caterer/(?P<pk>[0-9]+)/$", views.CatererView.as_view(), name='caterer'),
