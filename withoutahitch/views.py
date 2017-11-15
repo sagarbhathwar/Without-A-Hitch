@@ -57,7 +57,7 @@ def auth(request):
         return render(request, template_name = "withoutahitch/success.html")
     else:
         #return render(request, template_name = "withoutahitch/login.html")
-        return HttpResponseRedirect(reverse('withoutahitch:login'))
+        return HttpResponseRedirect(reverse('withoutahitch:login_page'))
 class IndexView(generic.ListView):
     template_name = "withoutahitch/index.html"
     context_object_name = "latest_events"
