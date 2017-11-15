@@ -1,6 +1,7 @@
 import abc
 
 from django.db import models
+from django.utils import timezone
 
 
 class User(models.Model):
@@ -16,12 +17,16 @@ class User(models.Model):
 
 class Vendor(models.Model):
     username = models.CharField(max_length=50, primary_key=True)
+    name = models.CharField(max_length=50)
     contact_num = models.CharField(max_length=50)
     email_id = models.EmailField()
 
+    def __str__(self):
+        return self.name
+
 
 class Service(models.Model):
-    vendor_id = models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     contact_num = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
@@ -47,11 +52,11 @@ class Caterer(Service):
 
 class Event(models.Model):
     date = models.DateTimeField()
-    venue_id = models.ForeignKey(Venue, on_delete=models.CASCADE)
-    caterer_id = models.ForeignKey(Caterer, on_delete=models.CASCADE)
-    decorater_id = models.ForeignKey(Decorator, on_delete=models.CASCADE)
-    vendor_id = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    booking_date = models.DateField(default=timezone.now)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
+    caterer = models.ForeignKey(Caterer, on_delete=models.CASCADE)
+    decorator = models.ForeignKey(Decorator, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     budget = models.IntegerField()
 
     @abc.abstractmethod
@@ -95,23 +100,23 @@ class Cuisine(models.Model):
 
 
 class CatererCuisine(models.Model):
-    caterer_id = models.OneToOneField(Caterer, on_delete=models.CASCADE, primary_key=True)
-    cuisine_id = models.OneToOneField(Cuisine, on_delete=models.CASCADE)
+    caterer = models.OneToOneField(Caterer, on_delete=models.CASCADE, primary_key=True)
+    cuisine = models.OneToOneField(Cuisine, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ("caterer_id", "cuisine_id")
 
 
 class EventService(models.Model):
-    event_id = models.OneToOneField(Event, on_delete=models.CASCADE, primary_key=True)
-    service_id = models.OneToOneField(Service, on_delete=models.CASCADE)
+    event = models.OneToOneField(Event, on_delete=models.CASCADE, primary_key=True)
+    service = models.OneToOneField(Service, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ("event_id", "service_id")
 
 
 class VenueAvailability(models.Model):
-    venue_id = models.OneToOneField(Venue, on_delete=models.CASCADE, primary_key=True)
+    venue = models.OneToOneField(Venue, on_delete=models.CASCADE, primary_key=True)
     allocated_date = models.DateField()
 
     class Meta:
@@ -119,7 +124,7 @@ class VenueAvailability(models.Model):
 
 
 class CatererAvailability(models.Model):
-    caterer_id = models.OneToOneField(Caterer, on_delete=models.CASCADE, primary_key=True)
+    caterer = models.OneToOneField(Caterer, on_delete=models.CASCADE, primary_key=True)
     allocated_date = models.DateField()
 
     class Meta:
