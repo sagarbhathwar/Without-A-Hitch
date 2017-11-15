@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.http import HttpResponse
 from .models import *
 from .forms import NameForm 
 import psycopg2
@@ -54,8 +55,8 @@ def auth(request):
         #return along with the proper page a session kind of variable
         return render(request, template_name = "withoutahitch/success.html")
     else:
-        return render(request, template_name = "withoutahitch/login.html")
-
+        #return render(request, template_name = "withoutahitch/login.html")
+        return HttpResponseRedirect(reverse('withoutahitch:login'))
 class IndexView(generic.ListView):
     template_name = "withoutahitch/index.html"
     context_object_name = "latest_events"
