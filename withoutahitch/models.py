@@ -10,6 +10,7 @@ class User(models.Model):
     contact_num = models.CharField(max_length=50, unique=True)
     address = models.CharField(max_length=200)
     password = models.CharField(max_length = 50,default = 'password')
+    
     def __str__(self):
         return self.name
 
