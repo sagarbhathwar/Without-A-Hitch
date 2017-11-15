@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
-
+from django.http import HttpResponse , HttpResponseRedirect
 from .models import *
-
+from .forms import NameForm 
+import psycopg2
+import psycopg2.extras
+from django.urls import reverse
 
 def login_page(request):
     return render(request, template_name="withoutahitch/login.html")
@@ -15,7 +18,46 @@ def register_page(request):
 def contact(request):
     return render(request, template_name="withoutahitch/contact.html")
 
-
+def auth(request):
+    #get the user name and password.
+    user_name = request.POST.get('username','')
+    #get the password
+    password = request.POST.get('password','')
+    #connect to a database
+    try:
+        #connceting to a withoutahitch database.
+        conn = psycopg2.connect("dbname = 'withoutahitch' user = 'team7' host = 'localhost' password = 'password'")
+    except:
+        print("Unable to connect to the database")
+    cursor = conn.cursor()
+    user_valid = True
+    pass_valid = True
+    #check if user exists.
+    SQL = "SELECT * FROM withoutahitch_user where username = %s;"
+    data = (user_name, )
+    cursor.execute(SQL,data)
+    records = cursor.fetchall()
+    print(records)
+    if(not len(records)):
+        #return error saying user doesnt exist
+        user_valid = False
+        print("User doesn't exist") # prints on the STDOUT
+    #if then get the password for that particular user and check against the password entered. 
+    SQL = "SELECT password from withoutahitch_user WHERE username = %s;"
+    data = (user_name,)
+    cursor.execute(SQL,data)
+    records = cursor.fetchall()
+    for i in records:
+        if(i[0] == password):
+            print("User exists and password given is valid")
+        else:
+            pass_valid = False
+    if(user_valid and pass_valid):
+        #return along with the proper page a session kind of variable
+        return render(request, template_name = "withoutahitch/success.html")
+    else:
+        #return render(request, template_name = "withoutahitch/login.html")
+        return HttpResponseRedirect(reverse('withoutahitch:login_page'))
 class IndexView(generic.ListView):
     template_name = "withoutahitch/index.html"
     context_object_name = "latest_events"
@@ -73,4 +115,3 @@ def plan_event(request):
                            "venues": venues,
                            "caterers": caterers
                            })
-
