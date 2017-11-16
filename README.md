@@ -15,3 +15,4 @@
 3. Run ```python manage.py makemigrations``` to create DB migrations from models
 4. Run ```python manage.py migrate``` to create tables in the database from  models.py
 5. Run ```python manage.py runserver``` to start the built in server
+6. Run ```python populate.py``` to populate the database with dummy data
