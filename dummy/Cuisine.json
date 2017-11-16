@@ -1,0 +1,83 @@
+[
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 1,
+    "fields": {
+      "name": "Andra",
+      "description": "Dishes served in Andra style and include spice.Andra Chilly Chicken,Chicken Fry are the common dishes served here.",
+      "image": "/img/cuisine_1.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 2,
+    "fields": {
+      "name": "Arab",
+      "description": "Arab cuisine is defined as various regional cuisines spanning the Arab world, from the Maghreb to the Fertile Crescent and the Arabian Peninsula",
+      "image": "/img/cuisine_2.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 3,
+    "fields": {
+      "name": "Bengali",
+      "description": "Maacher Jhol is where the gravy of the dish is made with ginger, turmeric, cumin powder, green chillis.Shorshe maach fish is a very popular dish.",
+      "image": "/img/cuisine_3.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 4,
+    "fields": {
+      "name": "Chinese",
+      "description": "Modern \"Eight Cuisines\" of China are Anhui, Cantonese, Fujian, Hunan, Jiangsu, Shandong, Sichuan, and Zhejiang cuisines.",
+      "image": "/img/cuisine_4.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 5,
+    "fields": {
+      "name": "French",
+      "description": "Consist of authenthic food like Chicken Basquaise ,Steak Diane, Cinnamon Apple Bostock etc",
+      "image": "/img/cuisine_5.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 6,
+    "fields": {
+      "name": "Italian American",
+      "description": "Vegetable dishes. Eggplant parmesan or melanzane alla parmigiana is a common Italian dish. It typically includes sliced eggplant, marinara sauce.",
+      "image": "/img/cuisine_6.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 7,
+    "fields": {
+      "name": "Japanese",
+      "description": "The traditional cuisine of Japan (?? washoku) is based on rice with miso soup and other dishes; there is an emphasis on seasonal ingredients",
+      "image": "/img/cuisine_7.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 8,
+    "fields": {
+      "name": "Keralite",
+      "description": "Offers a multitude of both vegetarian and non-vegetarian dishes prepared using fish, poultry and red meat with rice a typical accompaniment.",
+      "image": "/img/cuisine_8.jpg"
+    }
+  },
+  {
+    "model": "withoutahitch.cuisine",
+    "pk": 9,
+    "fields": {
+      "name": "Mughal",
+      "description": "It represents a combination of the cooking style and recipes of Central Asia and North India like Biryani,Paratha,Korma etc.",
+      "image": "/img/cuisine_9.jpg"
+    }
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "model": "withoutahitch.conference",
+    "pk": 11,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.conference",
+    "pk": 12,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.conference",
+    "pk": 13,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.conference",
+    "pk": 14,
+    "fields": {
+    }
+  }
+]

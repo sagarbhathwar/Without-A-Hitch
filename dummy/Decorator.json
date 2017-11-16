@@ -1,0 +1,26 @@
+[
+  {
+    "model": "withoutahitch.decorator",
+    "pk": 11,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.decorator",
+    "pk": 12,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.decorator",
+    "pk": 13,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.decorator",
+    "pk": 14,
+    "fields": {
+    }
+  }
+]

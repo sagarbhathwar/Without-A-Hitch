@@ -1,0 +1,62 @@
+[
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 1,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 2,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 3,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 4,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 5,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 6,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 7,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 8,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 9,
+    "fields": {
+    }
+  },
+  {
+    "model": "withoutahitch.marriage",
+    "pk": 10,
+    "fields": {
+    }
+  }
+]

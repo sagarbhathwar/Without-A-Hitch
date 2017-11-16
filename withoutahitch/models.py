@@ -10,8 +10,8 @@ class User(models.Model):
     email_id = models.EmailField(unique=True)
     contact_num = models.CharField(max_length=50, unique=True)
     address = models.CharField(max_length=200)
-    password = models.CharField(max_length = 50,default = 'password')
-    
+    password = models.CharField(max_length=50, default='password')
+
     def __str__(self):
         return self.name
 
@@ -69,21 +69,21 @@ class Marriage(Event):
     pass
 
     def __str__(self):
-        return "Marriage at " + str(Venue.objects.get(pk=self.venue_id)) + " on " + str(self.date)
+        return "Marriage at " + str(Venue) + " on " + str(self.date)
 
 
 class Conference(Event):
     pass
 
     def __str__(self):
-        return "Conference at " + str(Venue.objects.get(pk=self.venue_id)) + " on " + str(self.date)
+        return "Conference at " + str(Venue) + " on " + str(self.date)
 
 
 class Meeting(Event):
     pass
 
     def __str__(self):
-        return "Meeting at " + str(Venue.objects.get(pk=self.venue_id)) + " on " + str(self.date)
+        return "Meeting at " + str(Venue) + " on " + str(self.date)
 
 
 class CustomEvent(Event):
@@ -91,12 +91,12 @@ class CustomEvent(Event):
     description = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name + " at " + str(Venue.objects.get(pk=self.venue_id)) + " on " + str(self.date)
+        return self.name + " at " + str(Venue) + " on " + str(self.date)
 
 
 class Cuisine(models.Model):
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=100)
+    description = models.TextField()
     image = models.ImageField()
 
 
@@ -105,7 +105,7 @@ class CatererCuisine(models.Model):
     cuisine = models.OneToOneField(Cuisine, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ("caterer_id", "cuisine_id")
+        unique_together = ("caterer", "cuisine")
 
 
 class EventService(models.Model):
@@ -113,7 +113,7 @@ class EventService(models.Model):
     service = models.OneToOneField(Service, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ("event_id", "service_id")
+        unique_together = ("event", "service")
 
 
 class VenueAvailability(models.Model):
@@ -121,7 +121,7 @@ class VenueAvailability(models.Model):
     allocated_date = models.DateField()
 
     class Meta:
-        unique_together = ("venue_id", "allocated_date")
+        unique_together = ("venue", "allocated_date")
 
 
 class CatererAvailability(models.Model):
@@ -129,4 +129,4 @@ class CatererAvailability(models.Model):
     allocated_date = models.DateField()
 
     class Meta:
-        unique_together = ("caterer_id", "allocated_date")
+        unique_together = ("caterer", "allocated_date")
