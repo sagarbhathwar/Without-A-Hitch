@@ -10,7 +10,7 @@ class User(models.Model):
     email_id = models.EmailField(unique=True)
     contact_num = models.CharField(max_length=50, unique=True)
     address = models.CharField(max_length=200)
-    password = models.CharField(max_length=50, default='password')
+    password = models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -64,6 +64,9 @@ class Event(models.Model):
     def __str__(self):
         return
 
+    class Meta:
+        unique_together = (('date', 'caterer'), ('date','venue'))
+
 
 class Marriage(Event):
     pass
@@ -101,23 +104,15 @@ class Cuisine(models.Model):
 
 
 class CatererCuisine(models.Model):
-    caterer = models.OneToOneField(Caterer, on_delete=models.CASCADE, primary_key=True)
+    caterer = models.OneToOneField(Caterer, on_delete=models.CASCADE)
     cuisine = models.OneToOneField(Cuisine, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ("caterer", "cuisine")
 
 
-class EventService(models.Model):
-    event = models.OneToOneField(Event, on_delete=models.CASCADE, primary_key=True)
-    service = models.OneToOneField(Service, on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ("event", "service")
-
-
 class VenueAvailability(models.Model):
-    venue = models.OneToOneField(Venue, on_delete=models.CASCADE, primary_key=True)
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
     allocated_date = models.DateField()
 
     class Meta:
@@ -125,7 +120,7 @@ class VenueAvailability(models.Model):
 
 
 class CatererAvailability(models.Model):
-    caterer = models.OneToOneField(Caterer, on_delete=models.CASCADE, primary_key=True)
+    caterer = models.ForeignKey(Caterer, on_delete=models.CASCADE)
     allocated_date = models.DateField()
 
     class Meta:

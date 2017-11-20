@@ -22,6 +22,10 @@ urlpatterns = [
     url(r"^decorators/$", views.Decorators.as_view(), name='decorators'),
     url(r"^venues/$", views.Venues.as_view(), name='venues'),
 
-    url(r'^plan/$', views.plan_event, name='plan_event')
+    # Plan: Includes pick your own, package etc.
+    url(r'^plan/$', views.plan_event, name='plan_event'),
+    url(r'^pick_your_own/$', views.pick_your_own, name='pick_your_own'),
+    url(r'^pick_package/$', views.pick_package, name='pick_package'),
 
+    url(r'^book_event/$', views.book_event, name='book_event')
 ]

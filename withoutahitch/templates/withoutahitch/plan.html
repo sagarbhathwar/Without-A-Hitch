@@ -1,2 +1,45 @@
-{%  extends 'withoutahitch/base.html' %}
 {% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/plan_style.css' %}">
+    <style>
+    </style>
+</head>
+
+<body background="{% static '/image/back1.jpg' %}">
+
+<h1>
+</h1>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="tabs">
+    <div class="tab-2">
+        <label for="tab2-1">PICK YOUR OWN</label>
+        <input id="tab2-1" name="tabs-two" type="radio">
+        <div id="onee" width="100%" height="100%">
+            <iframe src="{% url 'withoutahitch:pick_your_own' %}" width="100%" height="800px"></iframe>
+        </div>
+    </div>
+
+    <div class="tab-2">
+        <label for="tab2-2">PICK A PACKAGE</label>
+        <input id="tab2-2" name="tabs-two" type="radio">
+        <div id="twoo" width="100%" height="100%">
+            <iframe id="if" src="{% url 'withoutahitch:pick_package' %}" width="100%" height="800px"></iframe>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="{% static 'css/pyo_style.css' %}">
+
+
+</head>
+
+<body>
+<div class="vid-container">
+    <div class="inner-container">
+        <div class="box">
+            <h1>Get Started!</h1>
+            {% csrf_token %}
+            <form action="{% url 'withoutahitch:book_event' %}" method="GET" target="_parent">
+
+                <select name="event_type">
+                    <option disabled="disabled" selected="selected">Pick Event Type</option>
+                    {% for evt in event_types %}
+                        <option value={{ evt }} id={{ evt }}>{{ evt }}</option>
+                    {% endfor %}
+                </select>
+
+                <input id="date" type="date" name="event_date" placeholder="Pick Date of Event" min/>
+
+                <select name="venue">
+                    <option disabled="disabled" selected="selected">Pick Venue</option>
+                    {% for venue in venues %}
+                        <option value={{ venue.id }}>{{ venue }}</option>
+                    {% endfor %}
+                </select>
+
+                <select name="caterer">
+                    <option disabled="disabled" selected="selected">Pick Caterer</option>
+                    {% for caterer in caterers %}
+                        <option value={{ caterer.id }}>{{ caterer }}</option>
+                    {% endfor %}
+                </select>
+
+                <select name="decorator">
+                    <option disabled="disabled" selected="selected">Pick Decorator</option>
+                    {% for decorator in decorators %}
+                        <option value={{ decorator.id }}>{{ decorator }}</option>
+                    {% endfor %}
+                </select>
+
+                <button> BOOK</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src="{% static '/js/index.js' %}"></script>
+
+<script type="text/javascript">
+    var tomorrow = new Date().toISOString().split('T')[0];
+    document.getElementById("date").setAttribute("min", tomorrow);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900);
+body {
+  background: url(http://www.festivalguide.de/wp-content/uploads/2013/05/SF_4328-970x477.jpg) no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Lato", sans-serif;
+}
+
+.header {
+  background: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  top: 20px;
+  padding: 15px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  position: fixed;
+  width: 100%;
+}
+@media (min-width: 450px) and (max-width: 950px) {
+  .header {
+    padding: 5px;
+  }
+}
+
+.container {
+  text-align: center;
+  width: 100%;
+}
+
+.logo {
+  border: 1px solid white;
+  color: white;
+  cursor: default;
+  display: inline-block;
+  margin-top: 4cm;
+  padding: 5px 360px;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.logo p {
+  float: left;
+  margin: 0;
+  font-size: 3em;
+  font-weight: 300;
+}
+@media (max-width: 500px) {
+  .logo p {
+    font-size: 2em;
+  }
+}
+.logo .first {
+  font-weight: bold;
+}
+
+.menu {
+  display: table;
+  height: 50px;
+  margin: 0 auto;
+  list-style-type: none;
+}
+.menu li {
+  float: left;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 120px;
+}
+@media (max-width: 500px) {
+  .menu li {
+    float: none;
+  }
+}
+.menu li::before {
+  background: white;
+  content: "";
+  height: 1px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  display: none;
+}
+.menu li:last-child::before {
+  display: none;
+}
+.menu li::after {
+  background: white;
+  bottom: -3px;
+  content: "";
+  height: 1px;
+  right: 0px;
+  opacity: 0;
+  position: absolute;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+  width: 100%;
+}
+.menu li:hover::after {
+  bottom: 0;
+  opacity: 0;
+}
+.menu li a {
+  cursor: pointer;
+  color: white;
+  display: block;
+  font-family: "Lato", sans-serif;
+  font-size: 1.2em;
+  font-weight: 300;
+  postiton: relative;
+  text-transform: uppercase;
+}
+.menu li a:hover {
+  color: gray;
+}
+
+.wrapper {
+  background: white;
+  height: 1600px;
+  padding: 50px;
+}
+.wrapper .title {
+  color: #e74c3c;
+  display: table;
+  font-size: 3em;
+  font-weight: 100;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.wrapper p {
+  display: block;
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
+  width: 100%;
+}
+@media (max-width: 500px) {
+  .wrapper p {
+    font-size: 1.5em;
+  }
+}

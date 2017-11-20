@@ -1,11 +1,20 @@
+import sys
+import random
+
 from django.shortcuts import render
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import *
-from .forms import NameForm
+from django.urls import reverse
+from django.contrib import messages
+from django.db import IntegrityError
 import psycopg2
 import psycopg2.extras
-from django.urls import reverse
+
+from .models import *
+from .forms import NameForm
+
+EVENT_TYPES = [subclass.__name__ for subclass in Event.__subclasses__()]
+SERVICE_TYPES = [subclass.__name__ for subclass in Service.__subclasses__()]
 
 
 def login_page(request):
@@ -109,13 +118,61 @@ class DecoratorView(generic.DetailView):
     model = Decorator
 
 
-def plan_event(request):
+def pick_your_own(request):
     decorators = Decorator.objects.all()
-    venues = Decorator.objects.all()
+    venues = Venue.objects.all()
     caterers = Caterer.objects.all()
 
-    return render(request, "withoutahitch/plan.html",
+    return render(request, "withoutahitch/pick_your_own.html",
                   context={"decorators": decorators,
                            "venues": venues,
-                           "caterers": caterers
+                           "caterers": caterers,
+                           "event_types": EVENT_TYPES
                            })
+
+
+def pick_package(request):
+    package1 = 0
+    return render(request, "withoutahitch/pick_package.html")
+
+
+def plan_event(request):
+    return render(request, "withoutahitch/plan.html")
+
+
+def book_event(request):
+    event_type = request.GET['event_type']
+    venue = Venue.objects.get(pk=request.GET['venue'])
+    caterer = Caterer.objects.get(pk=request.GET['caterer'])
+    decorator = Decorator.objects.get(pk=request.GET['decorator'])
+    date = request.GET['event_date']
+
+    total_cost = venue.cost + caterer.cost + decorator.cost
+    budget = 1.1 * total_cost
+
+    # For now, it is assigned to a random user
+    users = User.objects.all()
+    user = users[random.randint(0, len(users)) - 1]
+
+    caterer_availability = CatererAvailability(caterer=caterer, allocated_date=date)
+    venue_availability = VenueAvailability(venue=venue, allocated_date=date)
+
+    try:
+        venue_availability.save()
+    except IntegrityError:
+        messages.error(request, 'Venue is not available for the selected date')
+
+    else:
+        try:
+            caterer_availability.save()
+        except IntegrityError:
+            print("Error occured")
+            messages.error(request, 'Caterer is not available for the selected date')
+
+        else:
+            Event_ = getattr(sys.modules[__name__], event_type)
+            evt = Event_(date=date, venue=venue, caterer=caterer, decorator=decorator, user=user, budget=budget)
+            evt.save()
+            messages.info(request, 'Event booked successfully')
+
+    return HttpResponseRedirect(reverse("withoutahitch:plan_event"))
