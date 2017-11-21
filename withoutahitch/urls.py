@@ -7,14 +7,19 @@ app_name = "withoutahitch"
 
 urlpatterns = [
     url(r"^$", views.IndexView.as_view(), name="index"),
+    url(r"^base/$", views.base_page, name="base"),
     url(r"^login/$", views.login_page, name="login_page"),
     url(r"^register/$", views.register_page, name="register_page"),
     url(r"^about/$", views.contact, name="contact"),
+<<<<<<< Updated upstream
     url(r"^logging/$" , views.auth, name = "logging"),
     # adding logout for future use.
     url(r"^loggingout",views.logging_out,name = "logging_out"),
     # adding the view when a user presses register button.
     url(r"^registering",views.registering_user , name = "registering_user"),
+=======
+    url(r"^logging/$", views.auth, name="logging"),
+>>>>>>> Stashed changes
 
     # A page dedicated to each vendor
     url(r"^caterer/(?P<pk>[0-9]+)/$", views.CatererView.as_view(), name='caterer'),

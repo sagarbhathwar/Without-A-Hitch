@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib import messages
 from django.db import IntegrityError
+from django import forms
 import psycopg2
 import psycopg2.extras
 
@@ -17,10 +18,15 @@ from .forms import NameForm
 EVENT_TYPES = [subclass.__name__ for subclass in Event.__subclasses__()]
 SERVICE_TYPES = [subclass.__name__ for subclass in Service.__subclasses__()]
 
+<<<<<<< Updated upstream
 # view for handling registering event.
 def registering_user(request):
     # needs to be implemented, ez in 5 min
     print("dummy print to rectify identation prob") 
+=======
+def base_page(request):
+    return render(request, template_name="withoutahitch/base.html")
+>>>>>>> Stashed changes
 
 def login_page(request):
     return render(request, template_name="withoutahitch/login.html")
@@ -46,9 +52,13 @@ def logging_out(request):
 
 def auth(request):
     # get the user name and password.
-    user_name = request.POST.get('username', '')
+    user_name = request.POST['username']
     # get the password
-    password = request.POST.get('password', '')
+    password = request.POST['password']
+    # Assign a dummy session variable.
+    session_name = 'no user logged in'
+    # above session name can be initialized to request.session['username'] and
+    # can be used if a person without logging in tries to view any html page.
     # connect to a database
     try:
         # connceting to a withoutahitch database.
@@ -64,7 +74,11 @@ def auth(request):
     cursor.execute(SQL, data)
     records = cursor.fetchall()
     print(records)
+<<<<<<< Updated upstream
     if (not len(records)):
+=======
+    if not len(records):
+>>>>>>> Stashed changes
         # return error saying user doesn't exist
         user_valid = False
         print("User doesn't exist")  # prints on the STDOUT
@@ -74,21 +88,31 @@ def auth(request):
     cursor.execute(SQL, data)
     records = cursor.fetchall()
     for i in records:
-        if (i[0] == password):
+        if i[0] == password:
             print("User exists and password given is valid")
         else:
             pass_valid = False
-    if (user_valid and pass_valid):
+    if user_valid and pass_valid:
         # return along with the proper page a session kind of variable
         # The first argument i.e request contains a dictionary like session variabe in it.
         # Assigning a session variable , needs to be used in every page where the user uses it.
+<<<<<<< Updated upstream
         request.session['username'] = user_name
         return render(request, {"username" : session_name},template_name="withoutahitch/success.html")
+=======
+        session_name = user_name
+        request.session['username'] = session_name
+        return render(request, "withoutahitch/success.html", context={"username": session_name})
+>>>>>>> Stashed changes
     else:
         # return render(request, template_name = "withoutahitch/login.html")
         # the kwargs argument is used to send form which has forms.error and can be used to display
         # the message when the log in fails.
+<<<<<<< Updated upstream
         return HttpResponseRedirect(reverse('withoutahitch:login_page',kwargs = {'form':forms.Form}))
+=======
+        return HttpResponseRedirect(reverse('withoutahitch:login_page', kwargs={'form': forms.Form}))
+>>>>>>> Stashed changes
 
 
 class IndexView(generic.ListView):
