@@ -88,7 +88,7 @@ def auth(request):
         # return render(request, template_name = "withoutahitch/login.html")
         # the kwargs argument is used to send form which has forms.error and can be used to display
         # the message when the log in fails.
-        return HttpResponseRedirect(reverse('withoutahitch:login_page',kwargs = {'form':form}))
+        return HttpResponseRedirect(reverse('withoutahitch:login_page',kwargs = {'form':forms.Form}))
 
 
 class IndexView(generic.ListView):
