@@ -12,11 +12,15 @@ urlpatterns = [
     url(r"^register/$", views.register_page, name="register_page"),
     url(r"^about/$", views.contact, name="contact"),
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     url(r"^logging/$" , views.auth, name = "logging"),
     # adding logout for future use.
     url(r"^loggingout",views.logging_out,name = "logging_out"),
     # adding the view when a user presses register button.
     url(r"^registering",views.registering_user , name = "registering_user"),
+=======
+    url(r"^logging/$", views.auth, name="logging"),
+>>>>>>> Stashed changes
 =======
     url(r"^logging/$", views.auth, name="logging"),
 >>>>>>> Stashed changes

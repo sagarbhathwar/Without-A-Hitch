@@ -19,10 +19,15 @@ EVENT_TYPES = [subclass.__name__ for subclass in Event.__subclasses__()]
 SERVICE_TYPES = [subclass.__name__ for subclass in Service.__subclasses__()]
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # view for handling registering event.
 def registering_user(request):
     # needs to be implemented, ez in 5 min
     print("dummy print to rectify identation prob") 
+=======
+def base_page(request):
+    return render(request, template_name="withoutahitch/base.html")
+>>>>>>> Stashed changes
 =======
 def base_page(request):
     return render(request, template_name="withoutahitch/base.html")
@@ -75,7 +80,11 @@ def auth(request):
     records = cursor.fetchall()
     print(records)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     if (not len(records)):
+=======
+    if not len(records):
+>>>>>>> Stashed changes
 =======
     if not len(records):
 >>>>>>> Stashed changes
@@ -97,8 +106,14 @@ def auth(request):
         # The first argument i.e request contains a dictionary like session variabe in it.
         # Assigning a session variable , needs to be used in every page where the user uses it.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         request.session['username'] = user_name
         return render(request, {"username" : session_name},template_name="withoutahitch/success.html")
+=======
+        session_name = user_name
+        request.session['username'] = session_name
+        return render(request, "withoutahitch/success.html", context={"username": session_name})
+>>>>>>> Stashed changes
 =======
         session_name = user_name
         request.session['username'] = session_name
@@ -109,7 +124,11 @@ def auth(request):
         # the kwargs argument is used to send form which has forms.error and can be used to display
         # the message when the log in fails.
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         return HttpResponseRedirect(reverse('withoutahitch:login_page',kwargs = {'form':forms.Form}))
+=======
+        return HttpResponseRedirect(reverse('withoutahitch:login_page', kwargs={'form': forms.Form}))
+>>>>>>> Stashed changes
 =======
         return HttpResponseRedirect(reverse('withoutahitch:login_page', kwargs={'form': forms.Form}))
 >>>>>>> Stashed changes
