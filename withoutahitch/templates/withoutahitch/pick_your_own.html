@@ -7,7 +7,11 @@
     <title></title>
 
     <link rel="stylesheet" href="{% static 'css/pyo_style.css' %}">
-
+    <script type="text/javascript">
+        {% for message in messages %}
+                window.alert("{{ message }}");
+        {% endfor %}
+    </script>
 
 </head>
 
@@ -18,7 +22,7 @@
         <div class="box">
             <h1>Get Started!</h1>
             {% csrf_token %}
-            <form action="{% url 'withoutahitch:book_event' %}" method="GET" target="_parent">
+            <form action="{% url 'withoutahitch:book_event' %}" method="POST">
 
                 <select name="event_type">
                     <option disabled="disabled" selected="selected">Pick Event Type</option>
@@ -49,6 +53,8 @@
                         <option value={{ decorator.id }}>{{ decorator }}</option>
                     {% endfor %}
                 </select>
+
+                <input type="hidden" name="username" value="{{ request.session.username }}">
 
                 <button> BOOK</button>
 

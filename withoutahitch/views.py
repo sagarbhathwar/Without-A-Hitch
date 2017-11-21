@@ -1,4 +1,3 @@
-import random
 import sys
 
 import psycopg2
@@ -6,7 +5,7 @@ import psycopg2.extras
 from django import forms
 from django.contrib import messages
 from django.db import IntegrityError
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import generic
@@ -44,7 +43,8 @@ def registering_user(request):
         User(username=username, name=name, email_id=email_id,
              contact_num=contact_num, address=address, password=password).save()
         messages.info(request, "Registered successfully")
-        return render(request, template_name="withoutahitch/login.html")
+        request.session['username'] = username
+        return render(request, template_name="withoutahitch/index.html")
 
 
 def base_page(request):
@@ -71,7 +71,7 @@ def logging_out(request):
     except:
         pass
     # returns back to login page.
-    return render(request, template_name="withoutahitch/login.html")
+    return render(request, template_name="withoutahitch/index.html")
 
 
 def auth(request):
@@ -195,47 +195,46 @@ def plan_event(request):
         username = request.session.username
     except AttributeError:
         messages.error(request, "Login before booking an event")
+        redirect('withouahitch:login')
 
     return render(request, "withoutahitch/plan.html")
 
 
 def book_event(request):
-    event_type = request.GET['event_type']
-    venue = Venue.objects.get(pk=request.GET['venue'])
-    caterer = Caterer.objects.get(pk=request.GET['caterer'])
-    decorator = Decorator.objects.get(pk=request.GET['decorator'])
-    date = request.GET['event_date']
+    event_type = request.POST['event_type']
+    venue = Venue.objects.get(pk=request.POST['venue'])
+    caterer = Caterer.objects.get(pk=request.POST['caterer'])
+    decorator = Decorator.objects.get(pk=request.POST['decorator'])
+    date = request.POST['event_date']
+    username = request.POST['username']
 
     total_cost = venue.cost + caterer.cost + decorator.cost
     budget = 1.1 * total_cost
 
     # For now, it is assigned to a random user
+    user = User.objects.get(username=username)
+
+    caterer_availability = CatererAvailability(caterer=caterer, allocated_date=date)
+    venue_availability = VenueAvailability(venue=venue, allocated_date=date)
+
     try:
-        user = request.session.username
-    except AttributeError:
-        redirect('withoutahitch:login_page')
+        venue_availability.save()
+    except IntegrityError:
+        messages.error(request, 'Venue is not available for the selected date')
+        return HttpResponseRedirect(reverse('withoutahitch:pick_your_own'))
 
     else:
-
-        caterer_availability = CatererAvailability(caterer=caterer, allocated_date=date)
-        venue_availability = VenueAvailability(venue=venue, allocated_date=date)
-
         try:
-            venue_availability.save()
+            caterer_availability.save()
         except IntegrityError:
-            messages.error(request, 'Venue is not available for the selected date')
+            print("Error occured")
+            messages.error(request, 'Caterer is not available for the selected date')
+            return HttpResponseRedirect(reverse('withoutahitch:pick_your_own'))
 
         else:
-            try:
-                caterer_availability.save()
-            except IntegrityError:
-                print("Error occured")
-                messages.error(request, 'Caterer is not available for the selected date')
+            Event_ = getattr(sys.modules[__name__], event_type)
+            evt = Event_(date=date, venue=venue, caterer=caterer, decorator=decorator, user=user, budget=budget)
+            evt.save()
+            messages.info(request, 'Event booked successfully')
 
-            else:
-                Event_ = getattr(sys.modules[__name__], event_type)
-                evt = Event_(date=date, venue=venue, caterer=caterer, decorator=decorator, user=user, budget=budget)
-                evt.save()
-                messages.info(request, 'Event booked successfully')
-
-        return HttpResponseRedirect(reverse("withoutahitch:plan_event"))
+            return HttpResponseRedirect(reverse("withoutahitch:pick_your_own"))
