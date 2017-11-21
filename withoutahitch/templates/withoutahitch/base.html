@@ -3,8 +3,10 @@
 <head>
     <title>Without a Hitch</title>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static '/css/bootstrap/css/bootstrap.min.css' %}">
+
+    {% block head_block %}
+    {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-default navbar-inverse">
@@ -12,21 +14,31 @@
         <div class="navbar-header" item-height="100%"></div>
         <ul class="nav navbar-nav">
             <li id="home"><a href="{% url 'withoutahitch:index' %}">Home</a></li>
-            <li id="about"><a href="{% url 'withoutahitch:pick_package' %}">About</a></li>
+            <li id="about"><a href="{% url 'withoutahitch:index' %}">About</a></li>
             <li id="own"><a href="{% url 'withoutahitch:pick_your_own' %}">Plan an Event</a></li>
             <li id="package"><a href="{% url 'withoutahitch:pick_package' %}">Pick from a package!</a></li>
-
         </ul>
         {% if request.session.username %}
+            <!--
             <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown<span class="caret"></span></a>
+            <li class="dropdown-toggle">
+                <a href="#" class="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    {{ request.session.username }}
+                <span class="caret"></span>
+                </a>
                 <ul class="dropdown-menu" id="dropdown">
-                    <li><a href="">Account</a></li>
+                    <li><a href="#">Account</a></li>
                     <li><a href="#">My Events</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><a href="{% url 'withoutahitch:logging_out' %}">Logout</a></li>
                 </ul>
             </li>
+            </ul>
+            -->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">{{ request.session.username }}</a> </li>
+                <li><a href="#">Account</a></li>
+                <li><a href="#">My Events</a></li>
+                <li><a href="{% url 'withoutahitch:logging_out' %}">Logout</a></li>
             </ul>
         {% else %}
             <ul class="nav navbar-nav navbar-right">
@@ -40,8 +52,10 @@
         {% endif %}
     </div>
 </nav>
-{% block content %}
+{% block body_block %}
+
 {% endblock %}
-<script src="cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="{% static '/css/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

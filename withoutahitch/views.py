@@ -1,37 +1,55 @@
-import sys
 import random
+import sys
 
-from django import forms
-from django.shortcuts import render
-from django.views import generic
-from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django.contrib import messages
-from django.db import IntegrityError
-from django import forms
 import psycopg2
 import psycopg2.extras
+from django import forms
+from django.contrib import messages
+from django.db import IntegrityError
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views import generic
 
 from .models import *
-from .forms import NameForm
 
 EVENT_TYPES = [subclass.__name__ for subclass in Event.__subclasses__()]
 SERVICE_TYPES = [subclass.__name__ for subclass in Service.__subclasses__()]
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
+def check_username(request, username):
+    return User.objects.filter(username__iexact=username).exists()
+
+
 # view for handling registering event.
 def registering_user(request):
-    # needs to be implemented, ez in 5 min
-    print("dummy print to rectify identation prob") 
-=======
+    username = request.POST['username']
+    name = request.POST['name']
+    email_id = request.POST['email']
+    contact_num = request.POST['contact']
+    address = request.POST['address']
+    password = request.POST['password']
+
+    if User.objects.filter(username__iexact=username).exists():
+        messages.error(request, "Username is taken")
+        return HttpResponseRedirect(reverse('withoutahitch:register_page'))
+    if User.objects.filter(email_id__iexact=email_id):
+        messages.error(request, "Email is taken")
+        return HttpResponseRedirect(reverse('withoutahitch:register_page'))
+    if User.objects.filter(contact_num__iexact=contact_num):
+        messages.error(request, "Contact number already exists")
+        return HttpResponseRedirect(reverse('withoutahitch:register_page'))
+
+    else:
+        User(username=username, name=name, email_id=email_id,
+             contact_num=contact_num, address=address, password=password).save()
+        messages.info(request, "Registered successfully")
+        return render(request, template_name="withoutahitch/login.html")
+
+
 def base_page(request):
     return render(request, template_name="withoutahitch/base.html")
->>>>>>> Stashed changes
-=======
-def base_page(request):
-    return render(request, template_name="withoutahitch/base.html")
->>>>>>> Stashed changes
+
 
 def login_page(request):
     return render(request, template_name="withoutahitch/login.html")
@@ -53,7 +71,8 @@ def logging_out(request):
     except:
         pass
     # returns back to login page.
-    return render(request,template_name="withoutahitch/login.html")
+    return render(request, template_name="withoutahitch/login.html")
+
 
 def auth(request):
     # get the user name and password.
@@ -79,15 +98,8 @@ def auth(request):
     cursor.execute(SQL, data)
     records = cursor.fetchall()
     print(records)
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
     if (not len(records)):
-=======
-    if not len(records):
->>>>>>> Stashed changes
-=======
-    if not len(records):
->>>>>>> Stashed changes
         # return error saying user doesn't exist
         user_valid = False
         print("User doesn't exist")  # prints on the STDOUT
@@ -105,33 +117,12 @@ def auth(request):
         # return along with the proper page a session kind of variable
         # The first argument i.e request contains a dictionary like session variabe in it.
         # Assigning a session variable , needs to be used in every page where the user uses it.
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
         request.session['username'] = user_name
-        return render(request, {"username" : session_name},template_name="withoutahitch/success.html")
-=======
         session_name = user_name
         request.session['username'] = session_name
-        return render(request, "withoutahitch/success.html", context={"username": session_name})
->>>>>>> Stashed changes
-=======
-        session_name = user_name
-        request.session['username'] = session_name
-        return render(request, "withoutahitch/success.html", context={"username": session_name})
->>>>>>> Stashed changes
+        return render(request, "withoutahitch/index.html", context={"username": session_name})
     else:
-        # return render(request, template_name = "withoutahitch/login.html")
-        # the kwargs argument is used to send form which has forms.error and can be used to display
-        # the message when the log in fails.
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-        return HttpResponseRedirect(reverse('withoutahitch:login_page',kwargs = {'form':forms.Form}))
-=======
         return HttpResponseRedirect(reverse('withoutahitch:login_page', kwargs={'form': forms.Form}))
->>>>>>> Stashed changes
-=======
-        return HttpResponseRedirect(reverse('withoutahitch:login_page', kwargs={'form': forms.Form}))
->>>>>>> Stashed changes
 
 
 class IndexView(generic.ListView):
@@ -200,6 +191,11 @@ def pick_package(request):
 
 
 def plan_event(request):
+    try:
+        username = request.session.username
+    except AttributeError:
+        messages.error(request, "Login before booking an event")
+
     return render(request, "withoutahitch/plan.html")
 
 
@@ -214,28 +210,32 @@ def book_event(request):
     budget = 1.1 * total_cost
 
     # For now, it is assigned to a random user
-    users = User.objects.all()
-    user = users[random.randint(0, len(users)) - 1]
-
-    caterer_availability = CatererAvailability(caterer=caterer, allocated_date=date)
-    venue_availability = VenueAvailability(venue=venue, allocated_date=date)
-
     try:
-        venue_availability.save()
-    except IntegrityError:
-        messages.error(request, 'Venue is not available for the selected date')
+        user = request.session.username
+    except AttributeError:
+        redirect('withoutahitch:login_page')
 
     else:
+
+        caterer_availability = CatererAvailability(caterer=caterer, allocated_date=date)
+        venue_availability = VenueAvailability(venue=venue, allocated_date=date)
+
         try:
-            caterer_availability.save()
+            venue_availability.save()
         except IntegrityError:
-            print("Error occured")
-            messages.error(request, 'Caterer is not available for the selected date')
+            messages.error(request, 'Venue is not available for the selected date')
 
         else:
-            Event_ = getattr(sys.modules[__name__], event_type)
-            evt = Event_(date=date, venue=venue, caterer=caterer, decorator=decorator, user=user, budget=budget)
-            evt.save()
-            messages.info(request, 'Event booked successfully')
+            try:
+                caterer_availability.save()
+            except IntegrityError:
+                print("Error occured")
+                messages.error(request, 'Caterer is not available for the selected date')
 
-    return HttpResponseRedirect(reverse("withoutahitch:plan_event"))
+            else:
+                Event_ = getattr(sys.modules[__name__], event_type)
+                evt = Event_(date=date, venue=venue, caterer=caterer, decorator=decorator, user=user, budget=budget)
+                evt.save()
+                messages.info(request, 'Event booked successfully')
+
+        return HttpResponseRedirect(reverse("withoutahitch:plan_event"))
