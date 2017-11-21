@@ -49,10 +49,6 @@ def auth(request):
     user_name = request.POST.get('username', '')
     # get the password
     password = request.POST.get('password', '')
-    # Assign a dummy session variable.
-    session_name = 'no user logged in'
-    # above session name can be initialized to request.session['username'] and 
-    # can be used if a person without logging in tries to view any html page.
     # connect to a database
     try:
         # connceting to a withoutahitch database.
@@ -86,8 +82,7 @@ def auth(request):
         # return along with the proper page a session kind of variable
         # The first argument i.e request contains a dictionary like session variabe in it.
         # Assigning a session variable , needs to be used in every page where the user uses it.
-        session_name = user_name
-        request.session['username'] = session_name
+        request.session['username'] = user_name
         return render(request, {"username" : session_name},template_name="withoutahitch/success.html")
     else:
         # return render(request, template_name = "withoutahitch/login.html")
