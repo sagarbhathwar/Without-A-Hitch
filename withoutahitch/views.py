@@ -63,6 +63,10 @@ def contact(request):
     return render(request, template_name="withoutahitch/contact.html")
 
 
+def about_us(request):
+    return render(request, template_name="withoutahitch/about.html")
+
+
 # view when a user presses the logout button provided on the page
 def logging_out(request):
     try:
@@ -80,7 +84,6 @@ def auth(request):
     # get the password
     password = request.POST['password']
     # Assign a dummy session variable.
-    session_name = 'no user logged in'
     # above session name can be initialized to request.session['username'] and
     # can be used if a person without logging in tries to view any html page.
     # connect to a database
@@ -99,10 +102,11 @@ def auth(request):
     records = cursor.fetchall()
     print(records)
 
-    if (not len(records)):
+    if not len(records):
         # return error saying user doesn't exist
         user_valid = False
-        print("User doesn't exist")  # prints on the STDOUT
+        messages.error(request, "User doesn't exist")  # prints on the STDOUT
+        redirect('withoutahitch:login_page')
     # if then get the password for that particular user and check against the password entered.
     SQL = "SELECT password from withoutahitch_user WHERE username = %s;"
     data = (user_name,)
@@ -120,9 +124,11 @@ def auth(request):
         request.session['username'] = user_name
         session_name = user_name
         request.session['username'] = session_name
-        return render(request, "withoutahitch/index.html", context={"username": session_name})
+        # return render(request, "withoutahitch/index.html", context={"username": session_name})
+        return redirect(request.POST['referer'])
     else:
-        return HttpResponseRedirect(reverse('withoutahitch:login_page', kwargs={'form': forms.Form}))
+        messages.error(request, "Username or Password is invalid")
+        return redirect('withoutahitch:login_page')
 
 
 class IndexView(generic.ListView):
@@ -186,7 +192,6 @@ def pick_your_own(request):
 
 
 def pick_package(request):
-    package1 = 0
     return render(request, "withoutahitch/pick_package.html")
 
 

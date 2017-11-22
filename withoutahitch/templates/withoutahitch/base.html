@@ -4,7 +4,7 @@
     <title>Without a Hitch</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="{% static '/css/bootstrap/css/bootstrap.min.css' %}">
-
+    <style></style>
     {% block head_block %}
     {% endblock %}
 </head>
@@ -14,7 +14,7 @@
         <div class="navbar-header" item-height="100%"></div>
         <ul class="nav navbar-nav">
             <li id="home"><a href="{% url 'withoutahitch:index' %}">Home</a></li>
-            <li id="about"><a href="{% url 'withoutahitch:index' %}">About</a></li>
+            <li id="about"><a href="{% url 'withoutahitch:about' %}">About</a></li>
             <li id="own"><a href="{% url 'withoutahitch:pick_your_own' %}">Plan an Event</a></li>
             <li id="package"><a href="{% url 'withoutahitch:pick_package' %}">Pick from a package!</a></li>
         </ul>

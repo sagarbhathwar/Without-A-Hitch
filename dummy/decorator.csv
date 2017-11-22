@@ -1,0 +1,5 @@
+vendor,name,contact_num,address,description,image,cost
+per_flow,Perfect Flowers,9092234840,banashakari,in floral décor,/image/decorator_1.jpg,30000
+fnp,Ferns and Petals,8023234589,nagarbhavi,in royal décor,/image/decorator_2.jpg,70000
+pump_it_up,Pump it Up Decorators,9083242384,koramangala,in informal décor,/image/decorator_3.jpg,40000
+roy_wed,Royal Wedding Decorators,9483439223,indiranagar,in royal décor,/image/decorator_4.jpg,90000

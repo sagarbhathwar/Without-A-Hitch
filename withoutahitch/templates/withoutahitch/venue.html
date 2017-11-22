@@ -1,2 +1,71 @@
-{%  extends 'withoutahitch/base.html' %}
+{% extends 'withoutahitch/base.html' %}
 {% load static %}
+
+{% block head_block %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://file.myfontastic.com/n6vo44Re5QaWo8oCKShBs7/icons.css" rel="stylesheet">
+
+    <meta name="format-detection" content="telephone=no">
+
+
+    <link rel="stylesheet" href="{% static 'css/vendor_style.css' %}">
+{% endblock %}
+
+{% block body_block %}
+    <div class='center-container' id='ui-container'>
+        <div class='center'>
+            <div class='optimal-width' id='ui'>
+                <div class='page' id='page-info'>
+                    <div class='row'>
+                        <div class='col'>
+                            <img src="/static{{ venue.image }}" height="170px" width="250px">
+                        </div>
+                        <div class='col'>
+                            <h1>{{ venue.name }}</h1>
+                            <h2>{{ catere.address }}</h2>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <div class='th'>Cost</div>
+                        </div>
+                        <div class='col'>
+                            <div class='tc'>{{ venue.cost }}</div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <div class='th'>Address</div>
+                        </div>
+                        <div class='col'>
+                            <div class='tc'>{{ venue.address }}</div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <div class='th'>Contact</div>
+                        </div>
+                        <div class='col'>
+                            <div class='tc'>{{ venue.contact_num }}</div>
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='col'>
+                            <div class='th'>About us</div>
+                        </div>
+                        <div class='col'>
+                            <div class='tc'>{{ venue.description }}</div>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                    </div>
+                </div>
+                <div class='layer' id='texture'></div>
+            </div>
+        </div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+
+{% endblock %}

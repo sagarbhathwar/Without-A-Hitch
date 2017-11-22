@@ -1,16 +1,7 @@
+{% extends 'withoutahitch/base.html' %}
 {% load static %}
 
-<!DOCTYPE HTML>
-<!--
-	Full Motion by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-<head>
-    <title>Plan Your Event</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+{% block head_block %}
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"/>
     <style>
 
@@ -86,9 +77,202 @@
         /* Close */
         function closeNav() {
             document.getElementById("myNav").style.display = "none";
-        }        </script>
-</head>
-<body id="top">
+        }
+    </script>
+
+{% endblock %}
+{% block body_block %}
+
+
+<!-- The overlay -->
+<div id="myNav" class="overlay">
+
+    <!-- Button to close the overlay navigation -->
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+    <!-- Overlay content -->
+    <div class="overlay-content">
+        <p> Your booking has been confirmed, you will receive an email shortly! </p>
+    </div>
+
+</div>
+
+
+<section id="banner" data-video="{% static  '/image/banner.mp4'%}">
+    <div class="inner">
+        <header>
+            <h1>Get Started!</h1>
+            <p>Here we produce numerous packages, pick your favorite and you are Good to Go! <a
+                    href="https://templated.co/"></a></p>
+        </header>
+        <a href="#main" class="more">Learn More</a>
+    </div>
+</section>
+<div id="main">
+    <div class="inner">
+        <div class="thumbnails">
+            <div class="box">
+                <a onClick="openNav()" class="image fit"><img src="{% static '/image/pic01.jpg' %}" alt=""/></a>
+                <div class="inner">
+                    <h3 id="x">Wedding Package-Silver</h3>
+                    <p>Silver Package Buffet special along with Florist and 3000 seater hall.</p>
+                    <center><p id="y">PRICE: $40,000</p></center>
+                    <a onClick="openNav()" class="button fit" data-poptrox="youtube,800x400">BOOK</a>
+                </div>
+            </div>
+            <div class="box">
+                <a onClick="openNav()" class="image fit"><img src="{% static '/image/pic02.jpg' %}" alt=""/></a>
+                <div class="inner">
+                    <h3 id="x">Business Meeting Package-I</h3>
+                    <p>200 seater hall with Cocktail bar and 5 mics.</p>
+                    <center><p id="y">PRICE: $20,000</p></center>
+                    <a onClick="openNav()" class="button style2 fit" data-poptrox="youtube,800x400">BOOK</a>
+                </div>
+            </div>
+            <div class="box">
+                <a onClick="openNav()" class="image fit"><img src="{% static '/image/pic03.jpg' %}" alt=""/></a>
+                <div class="inner">
+                    <h3 id="x">Birthday Party Package-KIDS</h3>
+                    <p>Huge Hall with Host, who can organize numerous games. Caterer and Music System included.</p>
+                    <p id="y">
+                    <center>PRICE: $20,000</center>
+                    </p>
+                    <a onClick="openNav()" class="button style3 fit" data-poptrox="youtube,800x400">BOOK</a>
+                </div>
+            </div>
+            <div class="box">
+                <a onClick="openNav()" class="image fit"><img src="{% static '/image/pic04.jpg' %}" alt=""/></a>
+                <div class="inner">
+                    <h3 id="x">Music Concert Event</h3>
+                    <p>Auditorium with capacity upto 20,000 people, Advanced Music System and 3 mics.</p>
+                    <p>
+                    <center>PRICE: $100,000</center>
+                    </p>
+                    <a onClick="openNav()" class="button style2 fit" data-poptrox="youtube,800x400">BOOK</a>
+                </div>
+            </div>
+            <div class="box">
+                <a onClick="openNav()" class="image fit"><img src="{% static '/image/pic05.jpg' %}" alt=""/></a>
+                <div class="inner">
+                    <h3 id="x">Wedding Package-GOLD</h3>
+                    <p>3000 seater hall, with music system, flourist, caterer(multi-cuisine) and accomodation for
+                        guests.</p>
+                    <p id="y">
+                    <center>PRICE: $100,000</center>
+                    </p>
+                    <a onClick="openNav()" class="button style3 fit" data-poptrox="youtube,800x400">BOOK</a>
+                </div>
+            </div>
+            <div class="box">
+                <a onClick="openNav()" class="image fit"><img src="{% static '/image/pic06.jpg' %}" alt=""/></a><br/>
+                <h3 id="x">Business Meeting Package-II</h3>
+                <p>1000 seater hall with Cocktail bar,10 mics, flourist with themed decorations. Caterer to serve
+                    Starters included.</p>
+                <p id="y">
+                <center>PRICE: $50,000</center>
+                </p>
+                <a onClick="openNav()" class="button fit" data-poptrox="youtube,800x400">BOOK</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <h2>Without a Hitch</h2>
+        <p> </p>
+
+        <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+        </ul>{% extends 'withoutahitch/base.html' %}
+{% load static %}
+
+{% block head_block %}
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}"/>
+    <style>
+
+
+        /* The Overlay (background) */
+        .overlay {
+            /* Height & width depends on how you want to reveal the overlay (see JS below) */
+            height: 100%;
+            width: 0;
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            background-color: rgb(0, 0, 0); /* Black fallback color */
+            background-color: rgba(0, 0, 0, 0.9); /* Black w/opacity */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+        }
+
+        /* Position the content inside the overlay */
+        .overlay-content {
+            position: relative;
+            top: 25%; /* 25% from the top */
+            width: 100%; /* 100% width */
+            text-align: center; /* Centered text/links */
+            margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+        }
+
+        /* The navigation links inside the overlay */
+        .overlay p {
+            padding: 8px;
+            text-decoration: none;
+            font-size: 36px;
+            color: #818181;
+            display: block; /* Display block instead of inline */
+            transition: 0.3s; /* Transition effects on hover (color) */
+        }
+
+        /* When you mouse over the navigation links, change their color */
+        .overlay a:hover, .overlay a:focus {
+            color: #f1f1f1;
+        }
+
+        /* Position the close button (top right corner) */
+        .overlay .closebtn {
+            position: absolute;
+            top: 20px;
+            right: 45px;
+            font-size: 60px;
+        }
+
+        /* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+        @media screen and (max-height: 450px) {
+            .overlay a {
+                font-size: 20px
+            }
+
+            .overlay .closebtn {
+                font-size: 40px;
+                top: 15px;
+                right: 35px;
+            }
+        }
+
+    </style>
+    <script>
+        /* Open */
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+            document.getElementById("myNav").style.display = "block";
+        }
+
+        /* Close */
+        function closeNav() {
+            document.getElementById("myNav").style.display = "none";
+        }
+    </script>
+
+{% endblock %}
+{% block body_block %}
 
 
 <!-- The overlay -->
@@ -213,5 +397,29 @@
 <script src="{% static '/assets/js/util.js' %}"></script>
 <script src="{% static '/assets/js/main.js' %}"></script>
 
-</body>
-</html>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $("#package").addClass("active");
+    })
+    </script>
+{% endblock %}
+
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="{% static '/assets/js/jquery.min.js' %}"></script>
+<script src="{% static '/assets/js/jquery.scrolly.min.js' %}"></script>
+<script src="{% static '/assets/js/jquery.poptrox.min.js' %}"></script>
+<script src="{% static '/assets/js/skel.min.js' %}"></script>
+<script src="{% static '/assets/js/util.js' %}"></script>
+<script src="{% static '/assets/js/main.js' %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $("#package").addClass("active");
+    })
+    </script>
+{% endblock %}

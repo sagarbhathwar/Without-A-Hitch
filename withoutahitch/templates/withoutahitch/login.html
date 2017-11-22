@@ -36,7 +36,7 @@
                 <input type="password" name="password" id="pass">
                 <span class="spin"></span>
             </div>
-
+            <input type="hidden" value="{{ request.META.HTTP_REFERER }}" name="referer">
             <div class="button login">
                 <button>
                     <span>GO</span>

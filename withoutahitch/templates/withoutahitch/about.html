@@ -1,10 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'withoutahitch/base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block head_block %}
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+  body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      color: #f5f6f7;
+  }
+  p {font-size: 16px;}
+  .margin {margin-bottom: 45px;}
+  .text{color: black;
+         font-style: bolder;
+		 }
+  .bg-1 {
+      background-color: #66ff33; /* Voilet */
+      color: #ffffff;
+  }
+  .bg-2 {
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 {
+      background-color: #ffffff; /* White */
+      color: #555555;
+  }
+  .bg-4 {
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  </style>
+{% endblock %}
+
+
+{% block body_block %}
+
+
+
+<!-- First Container -->
+<div class="container-fluid bg-1 text-center">
+  <h3 class="margin text">Who We Are?</h3>
+  <img src="../../static/image/ab_last.jpg" class="img-responsive img-circle margin" style="display:inline" alt="last" width="350" height="350">
+  <h3 class="text">Enablers of Events With Out A Hitch!!</h3>
+  <p>enable events for be it Wedding, Birthdays etc u no need to roam around visit our With out A hitch site we will do your work for you </p>
+</div>
+
+<!-- Second Container -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">What we do?</h3>
+  <p>We organize Events, Weddings , Business talks , Birthdays , Concerts and much more... providing best food from best Restaurants elegant Decorations from skilled Florists.  </p>
+
+</div>
+
+<!-- Third Container (Grid) -->
+<div class="container-fluid bg-3 text-center">
+  <h1 class="margin">Connect with Us!!</h1><br>
+  <div class="row">
+    <div class="col-sm-4">
+	  <h3 class="text">Watch our latest Video!!</h3>
+	  <iframe width="250" height="250" src="https://www.youtube.com/embed/rsklVNfiyRA">
+       </iframe>
+    </div>
+   <div class="col-sm-4">
+       <h3 class="text">Tweet Us!!</h3>
+	  <blockquote class="twitter-tweet" data-lang="en" width="250" height="100" align="center"><p lang="en" dir="ltr">🇺🇸❗<a href="https://twitter.com/AmericanIdol?ref_src=twsrc%5Etfw">@AmericanIdol</a> premieres in MARCH, but voting starts tonight! We&#39;re giving 1⃣ lucky singer a second shot at a golden ticket to HOLLYWOOD!!! Vote now, you have the power to make their dreams come true... <a href="https://t.co/MZVX4xCyJe">https://t.co/MZVX4xCyJe</a> ✌🏻 <a href="https://t.co/TOQd8SZEoQ">pic.twitter.com/TOQd8SZEoQ</a></p>&mdash; KATY PERRY (@katyperry) <a href="https://twitter.com/katyperry/status/932443935389097984?ref_src=twsrc%5Etfw">November 20, 2017</a></blockquote>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+    <div class="col-sm-4">
+	  <h3 class="text">Visit Us!!</h3>
+	  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5831053856123!2d77.53232771398565!3d12.934494790880194!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3e468d8d36d3%3A0x694d74f6ac640acf!2sPES+University!5e0!3m2!1sen!2sin!4v1511203403976" width="250" height="250" frameborder="0" style="border:0" allowfullscreen>
+	  </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="container-fluid bg-4 text-center">
+
+</footer>
+
+    <script>
+    $(document).ready(function()
+    {
+        $("#about").addClass("active");
+    })
+    </script>
+{% endblock %}

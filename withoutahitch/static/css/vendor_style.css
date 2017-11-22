@@ -1,0 +1,211 @@
+/*******************************************/
+/* basic setup */
+/*******************************************/
+*
+{
+	font-family: "Roboto", sans-serif;
+	
+	margin: 0px;
+	padding: 0px;
+	
+	position: relative;
+	
+	box-sizing: border-box;
+}
+
+html, body { height: 100%; }
+
+/*******************************************/
+/* designing the pen */
+/*******************************************/
+
+/* body */
+body
+{
+	background: #333333;
+}
+
+/* header */
+
+
+#darkener
+{
+	background: rgba(0, 0, 0, 0.6);
+}
+#tint
+{
+	background: rgba(97, 67, 193, 0.15);
+}
+
+
+/* the ui itself */
+#ui-container
+{
+	min-height: 400px;
+	
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#ui
+{
+	background: #fff;
+	
+	margin: 0px auto;
+	
+	box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),
+				0 1px 10px 0 rgba(0,0,0,0.12),
+				0 2px 4px -1px rgba(0,0,0,0.3);
+	border-radius: 1px;
+	
+	overflow: hidden;
+}
+
+#ui .page
+{
+	text-align: left;
+	
+	padding: 40px;
+}
+
+#texture
+{
+	background: url("https://i.stack.imgur.com/8Jeyb.png");
+	
+	opacity: 0.2;
+}
+
+/* info page */
+#page-info .col:first-child
+{
+	width: 180px;
+	
+	margin-right: 40px;
+	
+	vertical-align: top;
+}
+#page-info .col:last-child
+{
+	max-width: calc(100% - 260px);
+	
+	vertical-align: top;
+}
+
+#page-info .row { margin-bottom: 5px; }
+#page-info .row:last-child { margin-bottom: 0px; }
+
+#page-info .row:nth-child(1)
+{
+	margin-bottom: 20px;
+}
+#page-info .row:nth-child(1) .col
+{
+	vertical-align: middle;
+}
+#page-info .row:nth-child(1) img
+{
+	width: 100%;
+	
+	border: 10px solid rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+}
+#page-info .row:nth-child(1) h1
+{
+	color: rgba(0, 0, 0, 0.87);
+	
+	font-size: 1.9em;
+	font-weight: 300;
+}
+#page-info .row:nth-child(1) h2
+{
+	color: rgba(0, 0, 0, 0.54);
+	
+	font-size: 1em;
+	font-weight: 400;
+	letter-spacing: 2px;
+}
+
+#page-info .th
+{
+	color: rgba(0, 0, 0, 0.87);
+	
+	text-align: right;
+	font-weight: 700;
+	
+	padding-right: 10px; /* image border */
+}
+#page-info .tc
+{
+	color: rgba(0, 0, 0, 0.87);
+}
+
+#page-info .row:last-child
+{
+	max-width: 320px;
+	
+	margin: 0px auto;
+	margin-top: 75px;
+}
+
+/*******************************************/
+/* basic elements */
+/*******************************************/
+
+/* grid */
+.optimal-width
+{
+	width: 94%;
+	max-width: 800px;
+}
+
+.col
+{
+	text-align: left;
+	
+	vertical-align: top;
+	
+	display: inline-block;
+}
+
+/* layer */
+.layer
+{
+	width: 100%;
+	height: 100%;
+	
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+/* center */
+.center-container
+{
+	width: 100%;
+	height: 100%;
+
+	text-align: center;
+}
+.center-container::before
+{
+	content: "";
+
+	height: 100%;
+	
+	vertical-align: middle;
+
+	margin-right: -8px;
+	
+	display: inline-block;
+}
+.center
+{
+	width: calc(100%);
+	
+	vertical-align: middle;
+
+	display: inline-block;
+}
+
+

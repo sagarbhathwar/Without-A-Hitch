@@ -1,2 +1,44 @@
-{%  extends 'withoutahitch/base.html' %}
+{% extends 'withoutahitch/base.html' %}
 {% load static %}
+
+{% block head_block %}
+
+    <link href='https://fonts.googleapis.com/css?family=Jaldi|Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'>
+
+    <link rel="stylesheet" href="{% static '/css/vendor_list_style.css' %}">
+
+{% endblock %}
+
+{% block body_block %}
+
+    <div class="container">
+        <div class="cards">
+            {% for venue in venues %}
+                <a class="card" href="{% url 'withoutahitch:venue' venue.id %}">
+                    <span class="card-header" style="background-image: url('/static{{ venue.image }}');">
+					<span class="card-title">
+						<h3>{{ venue.name }}</h3>
+					</span>
+				</span>
+                    <span class="card-summary">
+					{{ venue.description }}
+				</span>
+                    <span class="card-summary">
+					Cost: {{ venue.cost }}
+				</span>
+                    <span class="card-summary">
+					Location: {{ venue.address }}
+                </span>
+                    <span class="card-summary">
+					Size: {{ venue.venue_size }} sq. ft
+                </span>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+{% endblock %}

@@ -1,0 +1,6 @@
+vendor,name,contact_num,address,description,image,cost,venue_size
+taj_we,Taj,9303920212,indiranagar,marriage hall,/image/venue_1.jpg,110000,2500
+le_blr,Le Meridien,8900123454,banashakari,marriage hall,/image/venue_2.jpg,150000,6000
+she_blr,Sheraton,8907993932,nagarbhavi,party hall,/image/venue_3.jpg,190000,1500
+itc_gard,ITC Gardenia,8080799543,koramangala,marriage hall,/image/venue_4.jpg,100000,4000
+zuri_kor,Zuri,9809092323,koramangala,party hall,/image/venue_5.jpg,80000,5000

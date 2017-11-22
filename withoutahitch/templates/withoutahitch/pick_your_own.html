@@ -1,10 +1,7 @@
+{% extends 'withoutahitch/base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title></title>
+{% block head_block %}
 
     <link rel="stylesheet" href="{% static 'css/pyo_style.css' %}">
     <script type="text/javascript">
@@ -13,17 +10,22 @@
         {% endfor %}
     </script>
 
-</head>
+{% endblock %}
 
-<body>
-<p>{{ request.session.username }}</p>
+{% block body_block %}
+{% if not request.session.username %}
+<script type="text/javascript">
+    window.alert("Login before planning an event");
+    window.location.replace("{% url 'withoutahitch:login_page' %}");
+</script>
+{% endif %}
 <div class="vid-container">
     <div class="inner-container">
         <div class="box">
             <h1>Get Started!</h1>
-            {% csrf_token %}
             <form action="{% url 'withoutahitch:book_event' %}" method="POST">
 
+                {% csrf_token %}
                 <select name="event_type">
                     <option disabled="disabled" selected="selected">Pick Event Type</option>
                     {% for evt in event_types %}
@@ -69,7 +71,10 @@
 <script type="text/javascript">
     var tomorrow = new Date().toISOString().split('T')[0];
     document.getElementById("date").setAttribute("min", tomorrow);
+    $(document).ready(function()
+    {
+        $("#own").addClass("active");
+    })
 </script>
 
-</body>
-</html>
+{% endblock %}
